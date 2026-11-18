@@ -143,14 +143,12 @@ struct SearchView: View {
                     soulseek.isLoggedIn &&
                     !isSearchFocused {
                     EmptyStateView(
-                        title: "Search Soulseek",
-                        message:
-                            "Search for music, videos, " +
-                            "archives, books or any file. " +
-                            "Results arrive over about " +
-                            "30 seconds.",
-                        systemImage: "magnifyingglass"
-                    )
+    title: "Search Soulseek",
+    systemImage: "magnifyingglass",
+    message:
+        "Search for music, videos, archives, books " +
+        "or any file. Results arrive over about 30 seconds."
+)
                 }
             }
         }
