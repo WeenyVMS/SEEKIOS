@@ -179,7 +179,7 @@ struct AlbumDetailView: View {
         }
         .sheet(item: $findingTrack) { track in
             FindTrackSheet(track: track, album: current)
-                .presentationDetents([.medium, .large])
+                
         }
         .confirmDelete($pendingDelete) { deleted in
             // Leave the page once the whole album is gone.
