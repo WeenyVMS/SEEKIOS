@@ -167,7 +167,7 @@ struct VerticalGainSlider: View {
                         if snapped != value { value = snapped }
                     }
             )
-            .sensoryFeedback(.selection, trigger: value == 0)
+            
         }
     }
 }
