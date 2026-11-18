@@ -1,6 +1,7 @@
 import AVKit
 import MediaPlayer
 import SwiftUI
+import UIKit
 
 /// Full-screen player modelled on Apple Music: big artwork, or lyrics / queue with a compact
 /// header, over a blurred copy of the artwork.
@@ -58,11 +59,13 @@ struct NowPlayingView: View {
         .foregroundStyle(.white)
         .background { PlayerBackground(image: player.artwork) }
         .environment(\.colorScheme, .dark)
-        .presentationDragIndicator(.hidden)
-        .presentationBackground(.black)
         .sheet(isPresented: $showEqualizer) {
-            NavigationStack { EqualizerView(equalizer: player.equalizer) }
-                .presentationDetents([.medium, .large])
+            NavigationView {
+    EqualizerView(
+        equalizer: player.equalizer
+    )
+}
+                
         }
         .animation(.spring(response: 0.4, dampingFraction: 0.85), value: mode)
     }
@@ -116,9 +119,9 @@ struct NowPlayingView: View {
                 Image(systemName: favorites.isFavorite(track) ? "star.fill" : "star")
                     .font(.title3.weight(.semibold))
                     .frame(width: 34, height: 34)
-                    .contentTransition(.symbolEffect(.replace))
+                    
             }
-            .sensoryFeedback(.success, trigger: favorites.isFavorite(track))
+            
             moreMenu(track)
         }
         .padding(.bottom, compact ? 12 : 0)
@@ -162,9 +165,14 @@ struct NowPlayingView: View {
             }
             ArtworkMenu(target: library.album(containing: track).map(ArtworkTarget.album) ?? .track(track))
             Divider()
-            ShareLink(item: track.url) {
-                Label("Share File", systemImage: "square.and.arrow.up")
-            }
+            Button {
+    presentActivityItems([track.url])
+} label: {
+    Label(
+        "Share",
+        systemImage: "square.and.arrow.up"
+    )
+}
         } label: {
             Image(systemName: "ellipsis")
                 .font(.title3.weight(.semibold))
@@ -444,4 +452,42 @@ struct QueueView: View {
         }
         .buttonStyle(.plain)
     }
+}
+private func presentActivityItems(
+    _ items: [Any]
+) {
+    let controller =
+        UIActivityViewController(
+            activityItems: items,
+            applicationActivities: nil
+        )
+
+    guard let scene =
+        UIApplication.shared.connectedScenes
+            .compactMap({
+                $0 as? UIWindowScene
+            })
+            .first,
+          let window =
+              scene.windows.first(
+                  where: {
+                      $0.isKeyWindow
+                  }
+              ),
+          let root =
+              window.rootViewController else {
+        return
+    }
+
+    var presenter = root
+
+    while let shown =
+        presenter.presentedViewController {
+        presenter = shown
+    }
+
+    presenter.present(
+        controller,
+        animated: true
+    )
 }
