@@ -223,7 +223,7 @@ struct LibraryView: View {
             } else {
                 switch item {
                 case let .album(album):
-                    NavigationLink(value: album) { label }
+                    NavigationLink(album: album) { label }
                 case let .single(track):
                     Button { player.play([track]) } label: { label }
                 }
@@ -334,7 +334,7 @@ struct LibraryView: View {
                             sectionHeader(section.letter).padding(.horizontal, 20)
                         }
                         ForEach(section.items) { artist in
-                            NavigationLink(value: artist) {
+                            NavigationLink(artist: artist) {
                                 HStack(spacing: 14) {
                                     ArtworkView(source: artist.artwork, size: 56, cornerRadius: 28)
                                     VStack(alignment: .leading, spacing: 2) {
