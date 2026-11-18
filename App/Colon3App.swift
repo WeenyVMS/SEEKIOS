@@ -79,7 +79,7 @@ struct Colon3App: App {
                     }
                 }
         }
-        .onChange(of: scenePhase) { _, phase in
+        .onChange(of: scenePhase) { phase in
             switch phase {
             case .active:
                 soulseek.reconnectIfNeeded()
