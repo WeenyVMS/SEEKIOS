@@ -43,8 +43,10 @@ struct ContentView: View {
                 .modifier(RouterPresenters(active: true))
                 .tint(Color(hex: accentHex))
         }
-        .onChange(of: library.artworkRevision) { _, _ in player.reloadArtwork() }
-        .onChange(of: accentHex) { _, newHex in
+        .onChange(of: library.artworkRevision) { _ in
+    player.reloadArtwork()
+}
+        .onChange(of: accentHex) { newHex in
             syncAppIcon(with: newHex)
         }
         .tint(Color(hex: accentHex))
