@@ -86,7 +86,9 @@ struct PlaylistsListContent: View {
     }
 
     private func row(route: PlaylistRoute, name: String, tracks: [Track], symbol: String?, subtitle: String? = nil) -> some View {
-        NavigationLink(value: route) {
+        NavigationLink(
+    destination: PlaylistDetailView(route: route)
+) {
             HStack(spacing: 14) {
                 PlaylistArtwork(tracks: tracks, symbol: symbol, size: 64)
                 VStack(alignment: .leading, spacing: 2) {
