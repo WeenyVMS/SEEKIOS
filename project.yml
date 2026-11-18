@@ -19,7 +19,6 @@ targets:
       - Shared
     dependencies:
       - package: SoulseekKit
-      - target: TransfersWidget
     info:
       path: Support/Info.plist
       properties:
@@ -34,7 +33,6 @@ targets:
         LSSupportsOpeningDocumentsInPlace: true
         UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait]
         ITSAppUsesNonExemptEncryption: false
-        NSSupportsLiveActivities: true
         NSLocalNetworkUsageDescription: "Seekios uses the local network for Wi-Fi Transfer, so a computer on your Wi-Fi can add or download files."
         CFBundleURLTypes:
           - CFBundleURLName: com.srjw.seekios
