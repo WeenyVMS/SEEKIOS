@@ -76,13 +76,19 @@ struct AlbumDetailView: View {
                     .font(.title2.weight(.bold))
                     .multilineTextAlignment(.center)
                 if let artist = library.artist(named: album.artist) {
-                    NavigationLink(value: artist) {
-                        Text(album.artist).font(.title3).foregroundStyle(.tint)
-                    }
-                    .buttonStyle(.plain)
-                } else {
-                    Text(album.artist).font(.title3).foregroundStyle(.tint)
-                }
+    NavigationLink(
+        destination: ArtistDetailView(artist: artist)
+    ) {
+        Text(album.artist)
+            .font(.title3)
+            .foregroundColor(.accentColor)
+    }
+    .buttonStyle(PlainButtonStyle())
+} else {
+    Text(album.artist)
+        .font(.title3)
+        .foregroundColor(.accentColor)
+}
                 HStack(spacing: 6) {
                     Text(details(album))
                     if album.tracks.allSatisfy({ ["flac", "alac", "wav", "aif", "aiff"].contains($0.fileExtension) }) {
@@ -266,7 +272,9 @@ struct ArtistDetailView: View {
                     .padding(.top, 8)
                 LazyVGrid(columns: columns, alignment: .leading, spacing: 20) {
                     ForEach(artist.albums) { album in
-                        NavigationLink(value: album) {
+                        NavigationLink(
+    destination: AlbumDetailView(album: album)
+) {
                             VStack(alignment: .leading, spacing: 3) {
                                 ArtworkView(source: .album(album), cornerRadius: 8)
                                 Text(album.title).font(.subheadline.weight(.medium)).lineLimit(1)
@@ -371,7 +379,7 @@ struct FindTrackSheet: View {
     @Environment(\.dismiss) private var dismiss
 
     var body: some View {
-        NavigationStack {
+        NavigationView {
             List {
                 Section {
                     if soulseek.trackCandidates.isEmpty {
