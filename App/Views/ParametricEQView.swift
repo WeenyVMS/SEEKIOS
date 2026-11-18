@@ -315,7 +315,7 @@ struct AutoEqSearchSheet: View {
     }
 
     var body: some View {
-        NavigationStack {
+        NavigationView {
             List {
                 if loading {
                     HStack(spacing: 10) {
