@@ -741,8 +741,8 @@ struct DownloadRow: View {
         ) {
             if let shareURL = shareURL {
                 ActivityView(
-                    activityItems: [shareURL]
-                )
+    items: [shareURL]
+)
             }
         }
     }
@@ -1112,8 +1112,8 @@ struct LocalFolderBrowserView: View {
         ) {
             if let shareURL = shareURL {
                 ActivityView(
-                    activityItems: [shareURL]
-                )
+    items: [shareURL]
+)
             }
         }
         .fullScreenCover(
@@ -1407,19 +1407,6 @@ struct FolderDocumentPicker:
 }
 
 // MARK: - iOS 15 share sheet
-
-struct ActivityView:
-    UIViewControllerRepresentable {
-    let activityItems: [Any]
-
-    func makeUIViewController(
-        context: Context
-    ) -> UIActivityViewController {
-        UIActivityViewController(
-            activityItems: activityItems,
-            applicationActivities: nil
-        )
-    }
 
     func updateUIViewController(
         _ uiViewController:
