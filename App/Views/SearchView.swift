@@ -2138,8 +2138,8 @@ struct FileRow: View {
         ) {
             if let shareURL = shareURL {
                 ActivityView(
-                    activityItems: [shareURL]
-                )
+    items: [shareURL]
+)
             }
         }
     }
