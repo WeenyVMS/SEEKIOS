@@ -248,9 +248,11 @@ struct PlaylistDetailView: View {
         .navigationBarTitleDisplayMode(.inline)
         .overlay {
             if tracks.isEmpty {
-                EmptyStateView(title: "No Songs",
-                               message: emptyMessage,
-                               systemImage: "music.note.list")
+                EmptyStateView(
+    title: "No Playlists",
+    systemImage: "music.note.list",
+    message: "Le message existant"
+)
                     .padding(.top, 200)
             }
         }
@@ -376,7 +378,7 @@ struct AddToPlaylistSheet: View {
     @State private var newName = ""
 
     var body: some View {
-        NavigationStack {
+        NavigationView {
             List {
                 Button {
                     newName = ""
@@ -417,7 +419,7 @@ struct AddToPlaylistSheet: View {
                 }
             }
         }
-        .presentationDetents([.medium, .large])
+        
     }
 }
 
@@ -441,7 +443,7 @@ struct SongPickerSheet: View {
     }
 
     var body: some View {
-        NavigationStack {
+       NavigationView {
             List(results) { track in
                 let picked = chosen.contains(track.id)
                 let already = playlist.trackIDs.contains(track.id)
