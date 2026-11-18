@@ -220,14 +220,13 @@ struct DownloadsView: View {
                 if soulseek.visibleDownloads.isEmpty &&
                     soulseek.uploads.isEmpty {
                     EmptyStateView(
-                        title: "No Transfers",
-                        message:
-                            "Files you download from Search " +
-                            "appear here. Interrupted downloads " +
-                            "are saved on disk and resume " +
-                            "automatically.",
-                        systemImage: "arrow.down.circle"
-                    )
+    title: "No Transfers",
+    systemImage: "arrow.down.circle",
+    message:
+        "Files you download from Search appear here. " +
+        "Interrupted downloads are saved on disk and " +
+        "resume automatically."
+)
                 }
             }
         }
