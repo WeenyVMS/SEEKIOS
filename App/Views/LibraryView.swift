@@ -96,15 +96,15 @@ struct LibraryView: View {
                 scopePicker
 
                 EmptyStateView(
-                    title:
-                        library.isScanning
-                        ? "Loading Library…"
-                        : "No Music Yet",
-                    message:
-                        "Download from Search, tap + to import files, " +
-                        "or copy music into colon3 › Music in the Files app.",
-                    systemImage: "music.note.house"
-                )
+    title:
+        library.isScanning
+        ? "Loading Library…"
+        : "No Music Yet",
+    systemImage: "music.note.house",
+    message:
+        "Download from Search, tap + to import files, " +
+        "or copy music into colon3 › Music in the Files app."
+)
                 .padding(.top, 60)
 
                 if !library.isScanning {
