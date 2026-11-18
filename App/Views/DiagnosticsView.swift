@@ -57,11 +57,13 @@ struct DiagnosticsView: View {
             }
         }
         .sheet(item: $share) { file in
-            ActivityView(items: [file.url]).presentationDetents([.medium, .large])
+            ActivityView(items: [file.url])
         }
         .onReceive(refresh) { _ in if tab == .log { lines = Diagnostics.shared.lines } }
         .onAppear(perform: reload)
-        .onChange(of: tab) { _, _ in reload() }
+        .onChange(of: tab) { _ in
+    reload()
+}
     }
 
     private var logList: some View {
@@ -83,7 +85,7 @@ struct DiagnosticsView: View {
                     Text("No log yet.").foregroundStyle(.secondary)
                 }
             }
-            .onChange(of: lines.count) { _, _ in
+           .onChange(of: lines.count) { _ in
                 withAnimation { proxy.scrollTo(-1, anchor: .bottom) }
             }
             .onAppear { proxy.scrollTo(-1, anchor: .bottom) }
@@ -158,7 +160,7 @@ struct CrashDetailView: View {
             }
         }
         .sheet(item: $share) { file in
-            ActivityView(items: [file.url]).presentationDetents([.medium, .large])
+            ActivityView(items: [file.url])
         }
     }
 }
