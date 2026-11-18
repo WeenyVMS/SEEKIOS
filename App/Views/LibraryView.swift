@@ -33,13 +33,11 @@ struct LibraryView: View {
     private let columns = [GridItem(.flexible(), spacing: 16), GridItem(.flexible(), spacing: 16)]
 
     var body: some View {
-        NavigationStack {
+        NavigationView {
             content
                 .navigationTitle("Library")
                 .searchable(text: $query, prompt: "Search your library")
                 .toolbar { toolbar }
-                .navigationDestination(for: Album.self) { AlbumDetailView(album: $0) }
-                .navigationDestination(for: ArtistEntry.self) { ArtistDetailView(artist: $0) }
                 .navigationDestination(for: PlaylistRoute.self) { PlaylistDetailView(route: $0) }
                 .safeAreaInset(edge: .bottom) {
                     if selecting { selectionBar }
