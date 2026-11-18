@@ -184,7 +184,7 @@ struct NowPlayingView: View {
                 Image(systemName: player.isPlaying ? "pause.fill" : "play.fill")
                     .font(.system(size: 46))
                     .frame(width: 60, height: 60)
-                    .contentTransition(.symbolEffect(.replace.downUp))
+                    
             }
             Spacer()
             Button { player.next() } label: {
@@ -193,7 +193,7 @@ struct NowPlayingView: View {
             Spacer()
         }
         .buttonStyle(.plain)
-        .sensoryFeedback(.impact(weight: .light), trigger: player.isPlaying)
+        
     }
 
     private var bottomBar: some View {
@@ -426,7 +426,7 @@ struct QueueView: View {
                     .onDelete { player.removeFromQueue(at: $0) }
                 }
                 .listStyle(.plain)
-                .scrollContentBackground(.hidden)
+                
                 .environment(\.editMode, .constant(.active))
                 .mask(LinearGradient(stops: [.init(color: .black, location: 0), .init(color: .black, location: 0.92),
                                              .init(color: .clear, location: 1)], startPoint: .top, endPoint: .bottom))
