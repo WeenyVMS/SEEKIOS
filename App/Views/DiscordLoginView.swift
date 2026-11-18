@@ -13,7 +13,7 @@ struct DiscordLoginView: View {
     @State private var captured = false
 
     var body: some View {
-        NavigationStack {
+       NavigationView {
             DiscordWebView { token in
                 guard !captured else { return }
                 captured = true
