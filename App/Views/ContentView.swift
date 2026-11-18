@@ -11,20 +11,31 @@ struct ContentView: View {
 
     var body: some View {
         TabView(selection: $router.tab) {
-            Tab("Library", systemImage: "music.note.house", value: AppTab.library) {
-                LibraryView().modifier(FallbackMiniPlayer(open: openPlayer))
-            }
-            Tab("Search", systemImage: "magnifyingglass", value: AppTab.search) {
-                SearchView().modifier(FallbackMiniPlayer(open: openPlayer))
-            }
-            Tab("Downloads", systemImage: "arrow.down.circle", value: AppTab.downloads) {
-                DownloadsView().modifier(FallbackMiniPlayer(open: openPlayer))
-            }
-            .badge(soulseek.activeDownloadCount)
-            Tab("Settings", systemImage: "gearshape", value: AppTab.settings) {
-                SettingsView()
-            }
+    LibraryView()
+        .tabItem {
+            Label("Library", systemImage: "music.note.house")
         }
+        .tag(AppTab.library)
+
+    SearchView()
+        .tabItem {
+            Label("Search", systemImage: "magnifyingglass")
+        }
+        .tag(AppTab.search)
+
+    DownloadsView()
+        .tabItem {
+            Label("Downloads", systemImage: "arrow.down.circle")
+        }
+        .tag(AppTab.downloads)
+        .badge(soulseek.activeDownloadCount)
+
+    SettingsView()
+        .tabItem {
+            Label("Settings", systemImage: "gearshape")
+        }
+        .tag(AppTab.settings)
+}
         .modifier(TabAccessoryMiniPlayer(isVisible: player.current != nil, open: openPlayer))
         .modifier(RouterPresenters(active: !router.showPlayer))
         .sheet(isPresented: $router.showPlayer) {
